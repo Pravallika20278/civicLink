@@ -1,0 +1,16 @@
+text,category,department
+garbage not collected,Garbage,Sanitation
+garbage overflowing,Garbage,Sanitation
+waste dumped on road,Garbage,Sanitation
+street light not working,StreetLight,Electricity
+street lamp broken,StreetLight,Electricity
+pothole on road,Pothole,Roads
+road damaged,Pothole,Roads
+water pipe leaking,Water,WaterDepartment
+no water supply,Water,WaterDepartment
+drain blocked,Drainage,DrainageDepartment
+sewage overflowing,Drainage,DrainageDepartment
+traffic signal broken,Traffic,TrafficDepartment
+traffic light not working,Traffic,TrafficDepartment
+public bench broken,PublicProperty,Municipal
+park equipment damaged,PublicProperty,Municipal

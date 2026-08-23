@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CivicLink - My Profile</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            color: #222;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            height: 70px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #1769aa;
+        }
+
+        .logo span {
+            color: #20a464;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #444;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #1769aa;
+        }
+
+        .logout-btn {
+            background: #e53935;
+            color: white !important;
+            padding: 10px 18px;
+            border-radius: 7px;
+        }
+
+        /* MAIN */
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 35px auto;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .page-title h1 {
+            font-size: 30px;
+            color: #1f2937;
+        }
+
+        .page-title p {
+            margin-top: 7px;
+            color: #6b7280;
+        }
+
+        /* PROFILE HEADER */
+
+        .profile-header {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.07);
+            margin-bottom: 25px;
+        }
+
+        .profile-picture {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: #1769aa;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            font-weight: bold;
+        }
+
+        .profile-header-info h2 {
+            font-size: 25px;
+            margin-bottom: 8px;
+        }
+
+        .profile-header-info p {
+            color: #6b7280;
+            margin-bottom: 5px;
+        }
+
+        .verified {
+            display: inline-block;
+            background: #e8f8ef;
+            color: #16834c;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        /* GRID */
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.07);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            margin-bottom: 20px;
+            color: #1f2937;
+            font-size: 21px;
+        }
+
+        /* DETAILS */
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .detail-item {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 12px;
+        }
+
+        .detail-label {
+            display: block;
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .detail-value {
+            font-size: 16px;
+            font-weight: 500;
+            color: #222;
+        }
+
+        /* EDIT BUTTON */
+
+        .edit-btn {
+            border: none;
+            background: #1769aa;
+            color: white;
+            padding: 11px 22px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        .edit-btn:hover {
+            background: #125589;
+        }
+
+        /* STATS */
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .stat-box {
+            padding: 20px;
+            border-radius: 10px;
+            background: #f5f8fc;
+            text-align: center;
+        }
+
+        .stat-box h3 {
+            font-size: 27px;
+            color: #1769aa;
+            margin-bottom: 5px;
+        }
+
+        .stat-box p {
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* CREDIT SCORE */
+
+        .credit-score {
+            text-align: center;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 10px auto 20px;
+            border: 12px solid #20a464;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .score-circle strong {
+            font-size: 35px;
+            color: #1769aa;
+        }
+
+        .score-circle span {
+            font-size: 12px;
+            color: #777;
+        }
+
+        .score-text {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* FORM */
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ddd;
+            border-radius: 7px;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #1769aa;
+        }
+
+        .save-btn {
+            background: #20a464;
+            color: white;
+            border: none;
+            padding: 11px 22px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .cancel-btn {
+            background: #ddd;
+            color: #333;
+            border: none;
+            padding: 11px 22px;
+            border-radius: 7px;
+            cursor: pointer;
+            margin-left: 8px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 768px) {
+
+            .navbar {
+                padding: 0 15px;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .nav-links a:not(.logout-btn) {
+                display: none;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        Civic<span>Link</span>
+    </div>
+
+    <div class="nav-links">
+
+        <a href="dashboard.html">Dashboard</a>
+
+        <a href="complaint.html">Report Issue</a>
+
+        <a href="profile.html">Profile</a>
+
+        <a href="#" class="logout-btn" onclick="logout()">Logout</a>
+
+    </div>
+
+</nav>
+
+
+<!-- MAIN CONTENT -->
+
+<main class="container">
+
+    <div class="page-title">
+
+        <h1>My Profile</h1>
+
+        <p>View and manage your CivicLink account information.</p>
+
+    </div>
+
+
+    <!-- PROFILE HEADER -->
+
+    <section class="profile-header">
+
+        <div class="profile-picture" id="profileInitial">
+            P
+        </div>
+
+        <div class="profile-header-info">
+
+            <h2 id="profileName">
+                Pravallika
+            </h2>
+
+            <p id="profileEmail">
+                pravallika@example.com
+            </p>
+
+            <p id="profilePhone">
+                +91 XXXXX XXXXX
+            </p>
+
+            <span class="verified">
+                ✓ Verified Citizen
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <div class="content-grid">
+
+        <!-- LEFT COLUMN -->
+
+        <div>
+
+            <!-- PERSONAL INFORMATION -->
+
+            <section class="card">
+
+                <h2>Personal Information</h2>
+
+                <div id="profileDetails" class="details-grid">
+
+                    <div class="detail-item">
+
+                        <span class="detail-label">
+                            Full Name
+                        </span>
+
+                        <span class="detail-value" id="name">
+                            Pravallika
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span class="detail-label">
+                            Gender
+                        </span>
+
+                        <span class="detail-value" id="gender">
+                            Female
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span class="detail-label">
+                            Phone Number
+                        </span>
+
+                        <span class="detail-value" id="phone">
+                            +91 XXXXX XXXXX
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span class="detail-label">
+                            Email
+                        </span>
+
+                        <span class="detail-value" id="email">
+                            pravallika@example.com
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span class="detail-label">
+                            Profession
+                        </span>
+
+                        <span class="detail-value" id="profession">
+                            Student
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail-item">
+
+                        <span class="detail-label">
+                            Location
+                        </span>
+
+                        <span class="detail-value" id="location">
+                            Andhra Pradesh, India
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button class="edit-btn" onclick="showEditForm()">
+                    Edit Profile
+                </button>
+
+            </section>
+
+
+            <!-- EDIT FORM -->
+
+            <section class="card hidden" id="editForm">
+
+                <h2>Edit Profile</h2>
+
+                <div class="form-group">
+
+                    <label>Full Name</label>
+
+                    <input
+                        type="text"
+                        id="editName"
+                        placeholder="Enter your name"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Email</label>
+
+                    <input
+                        type="email"
+                        id="editEmail"
+                        placeholder="Enter your email"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Gender</label>
+
+                    <select id="editGender">
+
+                        <option value="Female">
+                            Female
+                        </option>
+
+                        <option value="Male">
+                            Male
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Profession</label>
+
+                    <input
+                        type="text"
+                        id="editProfession"
+                        placeholder="Enter your profession"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Location</label>
+
+                    <input
+                        type="text"
+                        id="editLocation"
+                        placeholder="Enter your location"
+                    >
+
+                </div>
+
+
+                <button class="save-btn" onclick="saveProfile()">
+                    Save Changes
+                </button>
+
+                <button class="cancel-btn" onclick="hideEditForm()">
+                    Cancel
+                </button>
+
+            </section>
+
+        </div>
+
+
+        <!-- RIGHT COLUMN -->
+
+        <div>
+
+            <!-- CIVIC STATS -->
+
+            <section class="card">
+
+                <h2>Civic Activity</h2>
+
+                <div class="stats">
+
+                    <div class="stat-box">
+
+                        <h3 id="totalComplaints">
+                            0
+                        </h3>
+
+                        <p>
+                            Complaints
+                        </p>
+
+                    </div>
+
+
+                    <div class="stat-box">
+
+                        <h3 id="resolvedComplaints">
+                            0
+                        </h3>
+
+                        <p>
+                            Resolved
+                        </p>
+
+                    </div>
+
+
+                    <div class="stat-box">
+
+                        <h3 id="pendingComplaints">
+                            0
+                        </h3>
+
+                        <p>
+                            Pending
+                        </p>
+
+                    </div>
+
+
+                    <div class="stat-box">
+
+                        <h3 id="feedbackCount">
+                            0
+                        </h3>
+
+                        <p>
+                            Feedback
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- CREDIT SCORE -->
+
+            <section class="card credit-score">
+
+                <h2>Civic Credit Score</h2>
+
+                <div class="score-circle">
+
+                    <strong id="creditScore">
+                        0
+                    </strong>
+
+                    <span>
+                        Points
+                    </span>
+
+                </div>
+
+                <p class="score-text">
+
+                    Your Civic Credit Score increases when
+                    you report genuine civic issues and provide
+                    useful feedback.
+
+                </p>
+
+            </section>
+
+
+            <!-- ACCOUNT STATUS -->
+
+            <section class="card">
+
+                <h2>Account Status</h2>
+
+                <p style="margin-bottom: 12px;">
+                    <strong>Status:</strong>
+                    <span style="color:#20a464;">
+                        Active
+                    </span>
+                </p>
+
+                <p style="margin-bottom: 12px;">
+                    <strong>Account Type:</strong>
+                    Citizen
+                </p>
+
+                <p>
+                    <strong>Member Since:</strong>
+                    2026
+                </p>
+
+            </section>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    © 2026 CivicLink — Making Communities Better Together
+
+</footer>
+
+
+<script>
+
+    /*
+     * Load saved profile data
+     */
+
+    function loadProfile() {
+
+        const savedProfile =
+            JSON.parse(localStorage.getItem("civiclinkUser"));
+
+        if (!savedProfile) {
+            return;
+        }
+
+        const name =
+            savedProfile.name || "Citizen";
+
+        const email =
+            savedProfile.email || "Not provided";
+
+        const phone =
+            savedProfile.phone || "Not provided";
+
+        const gender =
+            savedProfile.gender || "Not provided";
+
+        const profession =
+            savedProfile.profession || "Not provided";
+
+        const location =
+            savedProfile.location || "Not provided";
+
+
+        document.getElementById("profileName").textContent = name;
+
+        document.getElementById("profileEmail").textContent = email;
+
+        document.getElementById("profilePhone").textContent = phone;
+
+        document.getElementById("name").textContent = name;
+
+        document.getElementById("gender").textContent = gender;
+
+        document.getElementById("phone").textContent = phone;
+
+        document.getElementById("email").textContent = email;
+
+        document.getElementById("profession").textContent = profession;
+
+        document.getElementById("location").textContent = location;
+
+
+        /*
+         * First letter of user's name
+         */
+
+        document.getElementById("profileInitial").textContent =
+            name.charAt(0).toUpperCase();
+
+
+        /*
+         * Put existing data inside edit form
+         */
+
+        document.getElementById("editName").value = name;
+
+        document.getElementById("editEmail").value = email;
+
+        document.getElementById("editGender").value = gender;
+
+        document.getElementById("editProfession").value = profession;
+
+        document.getElementById("editLocation").value = location;
+    }
+
+
+    /*
+     * Show edit profile form
+     */
+
+    function showEditForm() {
+
+        document
+            .getElementById("editForm")
+            .classList
+            .remove("hidden");
+
+        document
+            .getElementById("editForm")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+    }
+
+
+    /*
+     * Hide edit profile form
+     */
+
+    function hideEditForm() {
+
+        document
+            .getElementById("editForm")
+            .classList
+            .add("hidden");
+    }
+
+
+    /*
+     * Save profile
+     */
+
+    function saveProfile() {
+
+        const name =
+            document.getElementById("editName").value.trim();
+
+        const email =
+            document.getElementById("editEmail").value.trim();
+
+        const gender =
+            document.getElementById("editGender").value;
+
+        const profession =
+            document.getElementById("editProfession").value.trim();
+
+        const location =
+            document.getElementById("editLocation").value.trim();
+
+
+        if (name === "") {
+
+            alert("Please enter your name.");
+
+            return;
+        }
+
+
+        let existingUser =
+            JSON.parse(localStorage.getItem("civiclinkUser")) || {};
+
+
+        const updatedUser = {
+
+            ...existingUser,
+
+            name: name,
+
+            email: email,
+
+            gender: gender,
+
+            profession: profession,
+
+            location: location
+        };
+
+
+        localStorage.setItem(
+            "civiclinkUser",
+            JSON.stringify(updatedUser)
+        );
+
+
+        loadProfile();
+
+        hideEditForm();
+
+        alert("Profile updated successfully!");
+    }
+
+
+    /*
+     * Logout
+     */
+
+    function logout() {
+
+        localStorage.removeItem("civiclinkUser");
+
+        localStorage.removeItem("token");
+
+        window.location.href = "login.html";
+    }
+
+
+    /*
+     * Load profile when page opens
+     */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        loadProfile
+    );
+
+</script>
+
+</body>
+</html>

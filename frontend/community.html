@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Communities</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>👥 Civic Communities</h1>
+
+<input
+id="name"
+placeholder="Community Name"
+>
+
+<textarea
+id="description"
+placeholder="Community description"
+></textarea>
+
+<input
+id="purpose"
+placeholder="Purpose"
+>
+
+<button onclick="createCommunity()">
+Create Community
+</button>
+
+<p id="message"></p>
+
+<hr>
+
+<h2>Approved Communities</h2>
+
+<div id="communities"></div>
+
+</div>
+
+<script>
+
+async function createCommunity() {
+
+const token =
+localStorage.getItem("token");
+
+const response =
+await fetch(
+"http://localhost:5000/api/communities",
+{
+
+method: "POST",
+
+headers: {
+
+"Content-Type":
+"application/json",
+
+"Authorization":
+"Bearer " + token
+
+},
+
+body: JSON.stringify({
+
+name:
+document.getElementById("name").value,
+
+description:
+document.getElementById("description").value,
+
+purpose:
+document.getElementById("purpose").value
+
+})
+
+});
+
+const data =
+await response.json();
+
+document.getElementById(
+"message"
+).innerText =
+data.message;
+
+}
+
+async function loadCommunities() {
+
+const response =
+await fetch(
+"http://localhost:5000/api/communities"
+);
+
+const communities =
+await response.json();
+
+const container =
+document.getElementById(
+"communities"
+);
+
+communities.forEach(c => {
+
+container.innerHTML += `
+
+<div class="community">
+
+<h3>${c.name}</h3>
+
+<p>${c.description}</p>
+
+<p>
+Leader:
+${c.leader?.name || "Unknown"}
+</p>
+
+</div>
+
+`;
+
+});
+
+}
+
+loadCommunities();
+
+</script>
+
+</body>
+</html>

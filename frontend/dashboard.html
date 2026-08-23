@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>CivicLink Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🌐 CivicLink</h1>
+
+<nav>
+
+<a href="dashboard.html">
+Dashboard
+</a>
+
+<a href="report.html">
+Report Issue
+</a>
+
+<a href="complaints.html">
+My Complaints
+</a>
+
+<a href="feedback.html">
+Feedback
+</a>
+
+<a href="community.html">
+Communities
+</a>
+
+</nav>
+
+</header>
+
+<main class="dashboard">
+
+<h2 id="welcome">
+Welcome to CivicLink
+</h2>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>🪙 Civic Coins</h3>
+
+<p id="coins">
+0
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>⭐ Civic Score</h3>
+
+<p id="score">
+50
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>📢 Complaints</h3>
+
+<p id="complaints">
+0
+</p>
+
+</div>
+
+</div>
+
+</main>
+
+<script>
+
+const user =
+JSON.parse(
+    localStorage.getItem("user")
+);
+
+if (user) {
+
+document.getElementById(
+    "welcome"
+).innerText =
+    "Welcome, " +
+    (user.name || "Citizen");
+
+document.getElementById(
+    "coins"
+).innerText =
+    user.civicCoins;
+
+document.getElementById(
+    "score"
+).innerText =
+    user.civicScore;
+
+}
+
+</script>
+
+</body>
+</html>

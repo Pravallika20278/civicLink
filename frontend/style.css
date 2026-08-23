@@ -1,0 +1,419 @@
+/* =========================================
+   CIVICLINK - GLOBAL STYLES
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(
+        135deg,
+        #e8f5e9,
+        #e3f2fd
+    );
+
+    min-height: 100vh;
+
+    color: #1f2937;
+}
+
+
+/* =========================================
+   PAGE
+========================================= */
+
+.page {
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 40px 20px;
+}
+
+
+/* =========================================
+   REGISTER CARD
+========================================= */
+
+.register-card {
+    width: 100%;
+
+    max-width: 520px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 35px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.12);
+
+    border: 1px solid #e5e7eb;
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.logo-section {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+.logo {
+    width: 65px;
+
+    height: 65px;
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: #e8f5e9;
+
+    border-radius: 50%;
+
+    font-size: 32px;
+}
+
+.logo-section h1 {
+    margin-top: 12px;
+
+    font-size: 32px;
+
+    color: #176b3a;
+}
+
+.logo-section p {
+    margin-top: 7px;
+
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+form h2 {
+    font-size: 24px;
+
+    margin-bottom: 8px;
+
+    color: #111827;
+}
+
+.form-description {
+    color: #6b7280;
+
+    font-size: 14px;
+
+    margin-bottom: 25px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   FORM GROUP
+========================================= */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #374151;
+}
+
+.form-group label span {
+    color: #dc2626;
+}
+
+
+/* =========================================
+   INPUTS
+========================================= */
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 9px;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.2s;
+
+    background: white;
+
+    font-family: inherit;
+}
+
+.form-group textarea {
+    resize: vertical;
+
+    min-height: 80px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #176b3a;
+
+    box-shadow:
+        0 0 0 3px rgba(23, 107, 58, 0.1);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #9ca3af;
+}
+
+.form-group small {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #6b7280;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   PASSWORD
+========================================= */
+
+.password-box {
+    position: relative;
+}
+
+.password-box input {
+    padding-right: 50px;
+}
+
+.password-toggle {
+    position: absolute;
+
+    right: 10px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    font-size: 18px;
+}
+
+
+/* =========================================
+   TERMS
+========================================= */
+
+.terms {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    margin: 20px 0;
+
+    font-size: 13px;
+
+    color: #4b5563;
+
+    line-height: 1.4;
+}
+
+.terms input {
+    margin-top: 3px;
+
+    width: 15px;
+
+    height: 15px;
+
+    cursor: pointer;
+}
+
+.terms label {
+    cursor: pointer;
+}
+
+
+/* =========================================
+   REGISTER BUTTON
+========================================= */
+
+.register-button {
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #176b3a;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.register-button:hover {
+    background: #12552e;
+
+    transform: translateY(-1px);
+}
+
+.register-button:disabled {
+    background: #9ca3af;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+.message {
+    margin-top: 15px;
+
+    padding: 10px;
+
+    border-radius: 8px;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    display: none;
+}
+
+.message.success {
+    display: block;
+
+    background: #dcfce7;
+
+    color: #166534;
+
+    border: 1px solid #bbf7d0;
+}
+
+.message.error {
+    display: block;
+
+    background: #fee2e2;
+
+    color: #991b1b;
+
+    border: 1px solid #fecaca;
+}
+
+
+/* =========================================
+   LOGIN
+========================================= */
+
+.login-section {
+    text-align: center;
+
+    margin-top: 25px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #e5e7eb;
+}
+
+.login-section p {
+    font-size: 14px;
+
+    color: #6b7280;
+}
+
+.login-section a {
+    color: #176b3a;
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.login-section a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .page {
+        padding: 20px 12px;
+    }
+
+    .register-card {
+        padding: 25px 20px;
+
+        border-radius: 14px;
+    }
+
+    .logo-section h1 {
+        font-size: 28px;
+    }
+
+    form h2 {
+        font-size: 22px;
+    }
+
+}

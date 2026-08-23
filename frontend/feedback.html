@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Feedback</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>⭐ Give Feedback</h1>
+
+<input
+id="complaintId"
+placeholder="Completed Complaint ID"
+>
+
+<select id="rating">
+
+<option value="5">⭐⭐⭐⭐⭐</option>
+<option value="4">⭐⭐⭐⭐</option>
+<option value="3">⭐⭐⭐</option>
+<option value="2">⭐⭐</option>
+<option value="1">⭐</option>
+
+</select>
+
+<textarea
+id="comment"
+placeholder="How was the work done?"
+></textarea>
+
+<button onclick="submitFeedback()">
+Submit Feedback
+</button>
+
+<p id="message"></p>
+
+</div>
+
+<script>
+
+async function submitFeedback() {
+
+const token =
+localStorage.getItem("token");
+
+const response =
+await fetch(
+"http://localhost:5000/api/feedback",
+{
+
+method: "POST",
+
+headers: {
+
+"Content-Type":
+"application/json",
+
+"Authorization":
+"Bearer " + token
+
+},
+
+body: JSON.stringify({
+
+complaintId:
+document.getElementById(
+"complaintId"
+).value,
+
+rating:
+Number(
+document.getElementById(
+"rating"
+).value
+),
+
+comment:
+document.getElementById(
+"comment"
+).value
+
+})
+
+});
+
+const data =
+await response.json();
+
+document.getElementById(
+"message"
+).innerText =
+data.message;
+
+}
+
+</script>
+
+</body>
+</html>

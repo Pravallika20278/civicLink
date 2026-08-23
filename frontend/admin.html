@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Authority Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🏛️ CivicLink Authority</h1>
+
+<div id="login">
+
+<h2>Authority Login</h2>
+
+<input
+id="name"
+placeholder="Officer Name"
+>
+
+<input
+id="department"
+placeholder="Department"
+>
+
+<input
+id="password"
+type="password"
+placeholder="Password"
+>
+
+<button onclick="login()">
+Login
+</button>
+
+<p id="loginMessage"></p>
+
+</div>
+
+<div id="dashboard" style="display:none">
+
+<h2>Complaints</h2>
+
+<div id="complaints"></div>
+
+</div>
+
+</div>
+
+<script>
+
+async function login() {
+
+const response =
+await fetch(
+"http://localhost:5000/api/auth/admin-login",
+{
+
+method: "POST",
+
+headers: {
+
+"Content-Type":
+"application/json"
+
+},
+
+body: JSON.stringify({
+
+name:
+document.getElementById(
+"name"
+).value,
+
+department:
+document.getElementById(
+"department"
+).value,
+
+password:
+document.getElementById(
+"password"
+).value
+
+})
+
+});
+
+const data =
+await response.json();
+
+if (data.token) {
+
+localStorage.setItem(
+"adminToken",
+data.token
+);
+
+document.getElementById(
+"login"
+).style.display =
+"none";
+
+document.getElementById(
+"dashboard"
+).style.display =
+"block";
+
+loadComplaints();
+
+} else {
+
+document.getElementById(
+"loginMessage"
+).innerText =
+data.message;
+
+}
+
+}
+
+async function loadComplaints() {
+
+const token =
+localStorage.getItem(
+"adminToken"
+);
+
+const response =
+await fetch(
+"http://localhost:5000/api/complaints/all",
+{
+
+headers: {
+
+"Authorization":
+"Bearer " + token
+
+}
+
+});
+
+const complaints =
+await response.json();
+
+const container =
+document.getElementById(
+"complaints"
+);
+
+container.innerHTML = "";
+
+complaints.forEach(c => {
+
+container.innerHTML += `
+
+<div class="complaint">
+
+<h3>${c.title}</h3>
+
+<p>${c.description}</p>
+
+<p>
+Category:
+${c.category}
+</p>
+
+<p>
+AI Recommendation:
+${c.recommendedDepartment}
+</p>
+
+<p>
+AI Confidence:
+${c.aiConfidence}%
+</p>
+
+<p>
+Status:
+${c.status}
+</p>
+
+<select
+onchange="updateStatus('${c._id}', this.value)"
+>
+
+<option>
+Update Status
+</option>
+
+<option value="Assigned">
+Assigned
+</option>
+
+<option value="In Progress">
+In Progress
+</option>
+
+<option value="Completed">
+Completed
+</option>
+
+</select>
+
+</div>
+
+`;
+
+});
+
+}
+
+async function updateStatus(id, status) {
+
+const token =
+localStorage.getItem(
+"adminToken"
+);
+
+await fetch(
+`http://localhost:5000/api/complaints/${id}/status`,
+{
+
+method: "PUT",
+
+headers: {
+
+"Content-Type":
+"application/json",
+
+"Authorization":
+"Bearer " + token
+
+},
+
+body: JSON.stringify({
+status
+})
+
+});
+
+loadComplaints();
+
+}
+
+</script>
+
+</body>
+</html>
