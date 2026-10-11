@@ -1,523 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>CivicLink | Report. Resolve. Improve.</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        body {
-            background: #f5f8fc;
-            color: #1f2937;
-        }
-
-        /* NAVBAR */
-
-        .navbar {
-            height: 72px;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 7%;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-            color: #1769aa;
-        }
-
-        .logo span {
-            color: #20a464;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #374151;
-            font-size: 15px;
-            font-weight: 500;
-        }
-
-        .nav-links a:hover {
-            color: #1769aa;
-        }
-
-        .nav-btn {
-            background: #1769aa;
-            color: white !important;
-            padding: 10px 18px;
-            border-radius: 7px;
-        }
-
-        .authority-btn {
-            background: #20a464;
-        }
-
-        /* HERO */
-
-        .hero {
-            min-height: calc(100vh - 72px);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 70px 8%;
-            gap: 50px;
-        }
-
-        .hero-content {
-            max-width: 600px;
-        }
-
-        .hero-content h1 {
-            font-size: 58px;
-            line-height: 1.1;
-            margin-bottom: 20px;
-        }
-
-        .hero-content h1 span {
-            color: #1769aa;
-        }
-
-        .hero-content h1 .green {
-            color: #20a464;
-        }
-
-        .hero-content p {
-            font-size: 19px;
-            line-height: 1.7;
-            color: #6b7280;
-            margin-bottom: 30px;
-        }
-
-        .buttons {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .primary-btn,
-        .secondary-btn {
-            text-decoration: none;
-            padding: 14px 25px;
-            border-radius: 8px;
-            font-weight: bold;
-            display: inline-block;
-        }
-
-        .primary-btn {
-            background: #1769aa;
-            color: white;
-        }
-
-        .primary-btn:hover {
-            background: #125589;
-        }
-
-        .secondary-btn {
-            background: white;
-            color: #1769aa;
-            border: 2px solid #1769aa;
-        }
-
-        .secondary-btn:hover {
-            background: #1769aa;
-            color: white;
-        }
-
-        /* HERO CARD */
-
-        .hero-card {
-            width: 420px;
-            background: white;
-            padding: 35px;
-            border-radius: 20px;
-            box-shadow: 0 10px 35px rgba(0,0,0,0.1);
-        }
-
-        .hero-card-icon {
-            width: 75px;
-            height: 75px;
-            background: #eaf4ff;
-            color: #1769aa;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 35px;
-            margin-bottom: 20px;
-        }
-
-        .hero-card h2 {
-            margin-bottom: 12px;
-        }
-
-        .hero-card p {
-            color: #6b7280;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-
-        .issue {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: #f5f8fc;
-            padding: 13px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-
-        .issue-icon {
-            width: 35px;
-            height: 35px;
-            background: #20a464;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .issue span {
-            font-size: 14px;
-        }
-
-        /* FEATURES */
-
-        .features {
-            background: white;
-            padding: 70px 8%;
-            text-align: center;
-        }
-
-        .features h2 {
-            font-size: 35px;
-            margin-bottom: 10px;
-        }
-
-        .features > p {
-            color: #6b7280;
-            margin-bottom: 40px;
-        }
-
-        .feature-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
-
-        .feature {
-            padding: 30px;
-            border-radius: 15px;
-            background: #f7f9fc;
-        }
-
-        .feature-icon {
-            font-size: 35px;
-            margin-bottom: 15px;
-        }
-
-        .feature h3 {
-            margin-bottom: 10px;
-        }
-
-        .feature p {
-            color: #6b7280;
-            line-height: 1.6;
-        }
-
-        /* FOOTER */
-
-        footer {
-            background: #17202a;
-            color: white;
-            text-align: center;
-            padding: 25px;
-        }
-
-        footer span {
-            color: #20a464;
-        }
-
-        /* MOBILE */
-
-        @media (max-width: 850px) {
-
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                padding: 50px 6%;
-            }
-
-            .hero-content h1 {
-                font-size: 42px;
-            }
-
-            .buttons {
-                justify-content: center;
-            }
-
-            .hero-card {
-                width: 100%;
-                max-width: 420px;
-            }
-
-            .feature-container {
-                grid-template-columns: 1fr;
-            }
-
-            .nav-links {
-                gap: 10px;
-            }
-
-            .nav-links a:first-child {
-                display: none;
-            }
-        }
-
-        @media (max-width: 550px) {
-
-            .navbar {
-                padding: 0 20px;
-            }
-
-            .logo {
-                font-size: 23px;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .hero-content h1 {
-                font-size: 36px;
-            }
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CivicLink - Community Issue Tracker</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
-
-    <!-- NAVBAR -->
-
-    <nav class="navbar">
-
-        <div class="logo">
-            Civic<span>Link</span>
+    <header class="navbar">
+        <div class="nav-content">
+            <h1>🏛️ CivicLink</h1>
+            <p>Report local issues and improve our community together</p>
         </div>
+    </header>
 
-        <div class="nav-links">
-
-            <a href="index.html">
-                Home
-            </a>
-
-            <a href="login.html">
-                Citizen Login
-            </a>
-
-            <a href="admin.html" class="nav-btn authority-btn">
-                Authority
-            </a>
-
-        </div>
-
-    </nav>
-
-
-    <!-- HERO -->
-
-    <section class="hero">
-
-        <div class="hero-content">
-
-            <h1>
-                Report.
-                <span>Resolve.</span>
-                <br>
-                <span class="green">Improve.</span>
-            </h1>
-
-            <p>
-                A smart civic platform connecting citizens,
-                communities and authorities to build cleaner,
-                safer and better communities.
-            </p>
-
-            <div class="buttons">
-
-                <a href="login.html" class="primary-btn">
-                    Report a Civic Issue
-                </a>
-
-                <a href="admin.html" class="secondary-btn">
-                    Authority Login
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <!-- RIGHT CARD -->
-
-        <div class="hero-card">
-
-            <div class="hero-card-icon">
-                🏙️
-            </div>
-
-            <h2>
-                Your Voice Matters
-            </h2>
-
-            <p>
-                Report problems in your community and
-                help authorities resolve them faster.
-            </p>
-
-            <div class="issue">
-
-                <div class="issue-icon">
-                    ✓
+    <main class="container">
+        <!-- Form to Submit an Issue -->
+        <section class="box form-box">
+            <h2>Report a Civic Problem</h2>
+            <form id="reportForm">
+                <div class="form-group">
+                    <label for="title">Issue Title *</label>
+                    <input type="text" id="title" placeholder="e.g., Streetlight damaged on 4th cross" required />
                 </div>
 
-                <span>
-                    Road damage reported
-                </span>
-
-            </div>
-
-            <div class="issue">
-
-                <div class="issue-icon">
-                    ✓
+                <div class="form-group">
+                    <label for="category">Category *</label>
+                    <select id="category" required>
+                        <option value="Roads & Potholes">Roads & Potholes</option>
+                        <option value="Street Lighting">Street Lighting</option>
+                        <option value="Garbage & Sanitation">Garbage & Sanitation</option>
+                        <option value="Water Supply & Drainage">Water Supply & Drainage</option>
+                        <option value="Public Safety">Public Safety</option>
+                        <option value="Other">Other</option>
+                    </select>
                 </div>
 
-                <span>
-                    Street light issue resolved
-                </span>
-
-            </div>
-
-            <div class="issue">
-
-                <div class="issue-icon">
-                    ✓
+                <div class="form-group">
+                    <label for="location">Location / Landmark *</label>
+                    <input type="text" id="location" placeholder="e.g., Near City Hospital gate" required />
                 </div>
 
-                <span>
-                    Garbage collection requested
-                </span>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- FEATURES -->
-
-    <section class="features">
-
-        <h2>
-            How CivicLink Works
-        </h2>
-
-        <p>
-            Simple reporting. Faster resolution. Better communities.
-        </p>
-
-
-        <div class="feature-container">
-
-            <div class="feature">
-
-                <div class="feature-icon">
-                    📝
+                <div class="form-group">
+                    <label for="description">Detailed Description *</label>
+                    <textarea id="description" rows="4" placeholder="Describe the issue in detail..."
+                        required></textarea>
                 </div>
 
-                <h3>
-                    Report Issues
-                </h3>
+                <button type="submit" id="submitBtn">Submit Report</button>
+            </form>
+        </section>
 
-                <p>
-                    Citizens can report civic problems
-                    using photos, videos, descriptions
-                    and location information.
-                </p>
+        <!-- Community Feed -->
+        <section class="box feed-box">
+            <h2>Recent Reports</h2>
+            <div id="loading">Connecting to database...</div>
+            <div id="reportsList" class="reports-container"></div>
+        </section>
+    </main>
 
-            </div>
-
-
-            <div class="feature">
-
-                <div class="feature-icon">
-                    🤖
-                </div>
-
-                <h3>
-                    Smart Classification
-                </h3>
-
-                <p>
-                    AI helps categorize complaints and
-                    direct them to the appropriate
-                    government department.
-                </p>
-
-            </div>
-
-
-            <div class="feature">
-
-                <div class="feature-icon">
-                    📊
-                </div>
-
-                <h3>
-                    Track Resolution
-                </h3>
-
-                <p>
-                    Citizens can track their complaints
-                    and provide feedback after the
-                    issue is resolved.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- FOOTER -->
-
-    <footer>
-
-        © 2026
-        <span>CivicLink</span>
-        — Making Communities Better Together
-
-    </footer>
-
+    <!-- Connect Scripts -->
+    <script src="./js/supabaseClient.js"></script>
+    <script src="./js/app.js"></script>
 </body>
+
 </html>

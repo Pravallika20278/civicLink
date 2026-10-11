@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Report Civic Issue</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📢 Report Civic Issue</h1>
+
+<input
+id="title"
+placeholder="Complaint title"
+>
+
+<textarea
+id="description"
+placeholder="Describe the issue"
+></textarea>
+
+<select id="category">
+
+<option value="Other">
+Let AI classify the issue
+</option>
+
+<option value="Road Damage">
+Road Damage
+</option>
+
+<option value="Waste Management">
+Waste Management
+</option>
+
+<option value="Streetlight">
+Streetlight
+</option>
+
+<option value="Water Supply">
+Water Supply
+</option>
+
+<option value="Drainage">
+Drainage
+</option>
+
+<option value="Public Property Damage">
+Public Property Damage
+</option>
+
+<option value="Public Safety">
+Public Safety
+</option>
+
+</select>
+
+<label>📷 Photo</label>
+
+<input
+type="file"
+id="photo"
+accept="image/*"
+>
+
+<label>🎥 Video</label>
+
+<input
+type="file"
+id="video"
+accept="video/*"
+>
+
+<label>🎤 Audio</label>
+
+<input
+type="file"
+id="audio"
+accept="audio/*"
+>
+
+<h3>📍 Location</h3>
+
+<button onclick="getLocation()">
+Use Current GPS Location
+</button>
+
+<p id="gpsStatus"></p>
+
+<textarea
+id="address"
+placeholder="Or enter location manually"
+></textarea>
+
+<button onclick="submitComplaint()">
+Submit Complaint
+</button>
+
+<p id="message"></p>
+
+</div>
+
+<script>
+
+let latitude = null;
+let longitude = null;
+
+function getLocation() {
+
+navigator.geolocation.getCurrentPosition(
+
+position => {
+
+latitude =
+position.coords.latitude;
+
+longitude =
+position.coords.longitude;
+
+document.getElementById(
+"gpsStatus"
+).innerText =
+"GPS location captured.";
+
+},
+
+error => {
+
+document.getElementById(
+"gpsStatus"
+).innerText =
+"GPS unavailable. Enter address manually.";
+
+}
+
+);
+
+}
+
+async function submitComplaint() {
+
+const token =
+localStorage.getItem("token");
+
+const title =
+document.getElementById("title").value;
+
+const description =
+document.getElementById("description").value;
+
+const category =
+document.getElementById("category").value;
+
+const address =
+document.getElementById("address").value;
+
+const response =
+await fetch(
+"http://localhost:5000/api/complaints",
+{
+
+method: "POST",
+
+headers: {
+
+"Content-Type":
+"application/json",
+
+"Authorization":
+"Bearer " + token
+
+},
+
+body: JSON.stringify({
+
+title,
+
+description,
+
+category,
+
+address,
+
+latitude,
+
+longitude
+
+})
+
+}
+);
+
+const data =
+await response.json();
+
+document.getElementById(
+"message"
+).innerText =
+data.message;
+
+}
+
+</script>
+
+</body>
+</html>

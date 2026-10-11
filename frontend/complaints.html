@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>My Complaints</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📋 My Complaints</h1>
+
+<div id="complaintList"></div>
+
+</div>
+
+<script>
+
+async function loadComplaints() {
+
+const token =
+localStorage.getItem("token");
+
+const response =
+await fetch(
+"http://localhost:5000/api/complaints/my",
+{
+
+headers: {
+
+"Authorization":
+"Bearer " + token
+
+}
+
+});
+
+const complaints =
+await response.json();
+
+const list =
+document.getElementById(
+"complaintList"
+);
+
+list.innerHTML = "";
+
+complaints.forEach(c => {
+
+const div =
+document.createElement("div");
+
+div.className =
+"complaint";
+
+div.innerHTML = `
+
+<h3>${c.title}</h3>
+
+<p>${c.description}</p>
+
+<p>
+<strong>Category:</strong>
+${c.category}
+</p>
+
+<p>
+<strong>Department:</strong>
+${c.recommendedDepartment}
+</p>
+
+<p>
+<strong>Status:</strong>
+${c.status}
+</p>
+
+<p>
+🤖 AI Confidence:
+${c.aiConfidence}%
+</p>
+
+<p>
+📍 ${c.location?.address || "No address"}
+</p>
+
+`;
+
+list.appendChild(div);
+
+});
+
+}
+
+loadComplaints();
+
+</script>
+
+</body>
+</html>
